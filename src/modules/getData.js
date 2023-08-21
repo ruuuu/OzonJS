@@ -1,6 +1,6 @@
 const getData = () => {
                   // http://localhost/goods
-                  // `https://ozon-290ae-default-rtdb.firebaseio.com/goods.json?${ str ? `search=${str}` : '' }`
+                  // если б данные получали чеез json-server, то:  `https://ozon-290ae-default-rtdb.firebaseio.com/goods.json?${ str ? `search=${str}` : '' }`
       return fetch('https://ozon-290ae-default-rtdb.firebaseio.com/goods.json')  // fetch  асинхроная операция, знаичт результат выполнения  займет некоторое время
             .then((response) => {
                   return response.json();             // then - асинхроннымй метод, вернет промис,  работает с данными полученными  от сервера(response-объект ответа сервера). Как только данные получим от сервера, так запутится then(). json() приводит данные в json струтктуру 

@@ -12,7 +12,7 @@ const search = () => {
       const minInput = document.getElementById('min');
       const maxInput = document.getElementById('max');
       const checkInput = document.getElementById('discount-checkbox');                   // чекбокс Акция
-      const checkMark = document.querySelector('.filter-check_checkmark')
+      const checkMark = document.querySelector('.filter-check_checkmark');
 
 
       const debounceSearch = debounce((evt) => {
@@ -47,7 +47,8 @@ const search = () => {
       });
 
 
-      minInput.addEventListener('input', () => {
+      minInput.addEventListener('input', (evt) => {
+            // evt.target.value - значение введнное в поле
             debounceFunc(minInput.value, maxInput.value, checkInput.value, inputSearch.value);
       });
 
@@ -56,10 +57,11 @@ const search = () => {
             debounceFunc(minInput.value, maxInput.value, checkInput.value, inputSearch.value);
       });
 
-
-      checkInput.addEventListener('input', () => {         // обработчик на чекбокс Акция
-            console.log(checkInput.checked);               // true/false
-            if(checkInput.checked){
+      
+//                                'input'  
+      checkInput.addEventListener('change', () => {         // обработчик на чекбокс Акция
+            // console.log(checkInput.checked);               // true/false
+            if(checkInput.checked){                         // если нажат чекбокс Акция
                   checkMark.classList.add('checked');
             }
             else{

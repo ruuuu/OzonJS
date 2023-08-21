@@ -1,4 +1,5 @@
 
+// поиск:
 export const searchFilter = (goods, value) => {                                     // value= значение введенное в поле поиска
       const filterGoods = goods.filter((item) => item.title.toLowerCase().includes(value.toLowerCase()));             // вернет массив элементов котрые подходят под условие
       return filterGoods;  // [{},{},{}] отфильтрованные товары
@@ -14,7 +15,7 @@ export const categoryFilter = (goods, value) => {                               
 
 
 
-// фильтр по цене:
+// фильтр по цене и Акция(чекбокс):
 export const funcFilter = (goods,  minValue,  maxValue, checkValue, searchString='') => {     //     searchString - то, что ввели в поле поиска                           
       
       
