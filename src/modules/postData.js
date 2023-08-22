@@ -1,4 +1,4 @@
-const postData = () => {
+const postData = (cartGoods) => {             // [{}, {}, {}]
 
       // fetch('https://ozon-290ae-default-rtdb.firebaseio.com/goods.json/23', {
       //       method: 'DELETE',
@@ -6,17 +6,10 @@ const postData = () => {
       // .then((res) => res.json());
            
 
-      fetch('https://ozon-290ae-default-rtdb.firebaseio.com/goods.json', { 
+      return fetch('https://jsonplaceholder.typicode.com/posts', { 
       
             method: 'POST',
-            body: JSON.stringify({  //  JSON.stringify преобразует объект в строку, id не указываем, json-sever сам его задаст
-                  title: "Ведьмак 3",
-                  price: 3000,
-                  sale: false,
-                  img: "https://cdn1.ozone.ru/multimedia/c400/1033180284.jpg",
-                  hoverImg: "https://cdn1.ozone.ru/multimedia/c400/1033180283.jpg",
-                  category: "Игровая приставка"
-            }),
+            body: JSON.stringify(cartGoods),          //  JSON.stringify преобразует объект в строку, id не указываем, json-sever сам его задаст
             headers: {
                   'Content-type': 'application/json; charset=UTF-8',
             },

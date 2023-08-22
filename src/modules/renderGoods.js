@@ -1,7 +1,7 @@
 const renderGoods = (goods) => {  // [{},{},{}]
      
       const goodsWrapper = document.querySelector('.goods'); 
-      localStorage.setItem('goods', JSON.stringify(goods));                   //  Чтобы при обновлении станицы, или переходе на др страницу localStorage  не очищался. В localStorage храним строку
+      localStorage.setItem('goods', JSON.stringify(goods));                   //  Чтобы при обновлении страницы, или переходе на др страницу localStorage  не очищался. В localStorage храним строку
      
 
       goodsWrapper.innerHTML = '';                    // перед заполнением очищаем

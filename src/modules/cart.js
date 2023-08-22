@@ -1,4 +1,7 @@
 import renderCart from './renderCart';
+import postData from './postData';
+
+
 
 const cart = () => {
 
@@ -8,7 +11,7 @@ const cart = () => {
       const goodsWrapper = document.querySelector('.goods');
       const cartTotal = document.querySelector('.cart-total > span');
       const cartWrapper = document.querySelector('.cart-wrapper');
-
+      const btnCartSend = document.querySelector('.cart-confirm');         // кнпока ОФормить заказ
      
 
       //  вместо того, чтобы  вешать обработчик события на каждую картчоку(иначе будет много обработчикво событяия), мы вешаем на их родителя(это делегирование):
@@ -40,18 +43,39 @@ const cart = () => {
                   const card = evt.target.closest('.card');             // если у evt.target/ег родителя есть класс.card, то  вернет этот элемент(с калссом .card). Если нет, то пойдет выше и так пока не дойдет до корневого элемента
                   const key = card.dataset.key;                         // получаем значение data-атрибута data-key
                   
-                  const cartGoods = JSON.parse(localStorage.getItem('cart'));       // JSON.parse() превращает из строки в массив
+                  const cartGoods = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];  // JSON.parse() превращает из строки в массив
                  
-                  const cartGood = cartGoods.find((cartGood) => { 
-                       
-                        return cartGood.id === +key;          // вернет первый элемент, котрый подходит под условие
+                  const index = cartGoods.findIndex((item) => {        // вернет индекс элемента, котрый подходит под условие
+                        return item.id === +key; 
                   });
-                        
                  
-                  cartGoods.splice(cartGood.id, 1);           // удаляет из масива элемент
+                   
+                  cartGoods.splice(index, 1);           // удаляет из масива один элемент, начиная с индекса index
+                  
                   localStorage.setItem('cart', JSON.stringify(cartGoods));
-                  renderCart(JSON.parse(localStorage.getItem('cart', JSON.stringify(cartGoods))))
+                  renderCart(JSON.parse(localStorage.getItem('cart', JSON.stringify(cartGoods))));
+
+                  const totalSum = cartGoods.reduce((currentSum, item) => {
+                        return currentSum + item.price;
+                  }, 0); 
+
+                  cartTotal.textContent = totalSum;
             }
+      });
+
+
+
+      btnCartSend.addEventListener('click', () => {
+            
+            const cartGoods = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+            postData(cartGoods).then(() => {            // отправка данным методом POSt, как только данные успешно отправятся, запустится then()
+
+                  localStorage.removeItem('cart');          // очищаем localStorage
+                  renderCart([]);                           // перерисовываем корзину
+                  
+                  cartTotal.textContent = 0;
+            });                    
+            
       });
 
 
