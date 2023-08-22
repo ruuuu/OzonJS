@@ -1,7 +1,7 @@
 const renderGoods = (goods) => {  // [{},{},{}]
      
       const goodsWrapper = document.querySelector('.goods'); 
-      localStorage.setItem('goods', JSON.stringify(goods));                   // в localStorage храним строку
+      localStorage.setItem('goods', JSON.stringify(goods));                   //  Чтобы при обновлении станицы, или переходе на др страницу localStorage  не очищался. В localStorage храним строку
      
 
       goodsWrapper.innerHTML = '';                    // перед заполнением очищаем
@@ -12,8 +12,7 @@ const renderGoods = (goods) => {  // [{},{},{}]
                         <div class="card" data-key=${goodItem.id}>  <!-- добавили дата-атрибут -->
                               ${goodItem.sale ?  `<div class="card-sale">🔥Hot Sale🔥</div>` : ''} 
                               <div class="card-img-wrapper">
-                                    <span class="card-img-top"
-                                          style="background-image: url('${goodItem.img}')"></span>
+                                  <span class="card-img-top" style="background-image: url('${goodItem.img}')"></span>
                               </div>
                               <div class="card-body justify-content-between">
                                     <div class="card-price">${goodItem.price} ₽</div>
